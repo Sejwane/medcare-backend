@@ -1,16 +1,13 @@
-# Use Java 21 (matching your build output)
-FROM eclipse-temurin:21-jdk-alpine
-
-# Set the working directory inside the container
+# Stage 1: Build the application
+FROM maven:3.9.6-eclipse-temurin-21-alpine AS build
 WORKDIR /app
+COPY . .
+RUN mvn clean package -DskipTests
 
-# Copy the JAR file from your 'target' folder into the container
-# This matches the file created in your last build success message
-COPY target/medcare-backend-0.0.1-SNAPSHOT.jar app.jar
-
-# Expose the port Spring Boot runs on
+# Stage 2: Run the application
+FROM eclipse-temurin:21-jdk-alpine
+WORKDIR /app
+COPY --from=build /app/target/medcare-backend-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8080
-
-# Command to run the application
 ENTRYPOINT ["java", "-jar", "app.jar"]
 
