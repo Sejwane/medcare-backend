@@ -51,8 +51,8 @@ public class Department {
 
     }
 
-    public void setConsultationFee(){
-        this.consultationFee=consultationFee;
+    public void setConsultationFee(double consultationFee){
+        this.consultationFee = consultationFee;
     }
 
 }
