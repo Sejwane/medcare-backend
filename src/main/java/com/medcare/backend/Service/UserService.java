@@ -1,5 +1,5 @@
 package com.medcare.backend.Service;
 
-public class Patient {
+public class UserService {
 
 }
