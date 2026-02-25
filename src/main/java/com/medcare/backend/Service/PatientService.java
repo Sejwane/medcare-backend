@@ -7,8 +7,11 @@ import org.springframework.stereotype.Service;
 
 @Service 
 public class PatientService {
+
     @Autowired
     private PatientRepository patientRepository;
 
-
+    public Patient register(Patient patient) {
+        return patientRepository.save(patient);
+    }
 }
