@@ -7,19 +7,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.medcare.backend.Model.Appointment;
-import com.medcare.backend.Service.AppointmentService;
+import com.medcare.backend.Model.MedicalRecord;
+import com.medcare.backend.Service.MedicalRecordService;
 
 @RestController
-@RequestMapping("api/appointments")
-@CrossOrigin(origins="*")
+@RequestMapping("/api/medical_records")
+@CrossOrigin(origins = "*") 
 
-public class AppointmentController {
+public class MedicalRecordController {
+
     @Autowired
-    private AppointmentService appointmentService;
-    @PostMapping("/register")
-    public Appointment register(@RequestBody Appointment appointment) {
-        
-        return appointmentService.register(appointment);
+    private MedicalRecordService medicalRecordService;
+
+    @PostMapping("/add")
+    public MedicalRecord register(@RequestBody MedicalRecord medicalRecord) {
+        return medicalRecordService.register(medicalRecord);
     }
+    
 }

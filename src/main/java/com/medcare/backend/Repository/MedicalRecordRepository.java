@@ -1,11 +1,11 @@
 package com.medcare.backend.Repository;
 
-import com.medcare.backend.Model.Appointment;
+import com.medcare.backend.Model.MedicalRecord;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
 
-public interface AppointmentRepository extends JpaRepository<Appointment,Integer>{
+public interface MedicalRecordRepository extends JpaRepository<MedicalRecord,Integer>{
 
 }
