@@ -19,7 +19,7 @@ public class MedicalRecordController {
     @Autowired
     private MedicalRecordService medicalRecordService;
 
-    @PostMapping("/add")
+    @PostMapping("/register")
     public MedicalRecord register(@RequestBody MedicalRecord medicalRecord) {
         return medicalRecordService.register(medicalRecord);
     }
