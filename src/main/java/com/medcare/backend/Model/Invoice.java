@@ -2,21 +2,8 @@ package com.medcare.backend.Model;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
-/*
 
-invoices...tbl name
 
-id int
-
-appointment_id int
-
-amount double
-
-payment_status string 
-
-invoice_date local date
-
-*/ 
 @Entity
 @Table(name="invoices")
 
@@ -95,7 +82,4 @@ public class Invoice {
     }
 
     }
-
-
-
 
