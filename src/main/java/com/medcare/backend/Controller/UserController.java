@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.medcare.backend.Model.User;
 import com.medcare.backend.Service.UserService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/users")
@@ -24,4 +29,10 @@ public class UserController {
         //calls the service
         return userService.registerUser(user);
     }
+
+    @GetMapping("/all")
+    public List<User>getAllUsers(@RequestParam User user) {
+        return userService.getAllUsers();
+    }
+    
 }
