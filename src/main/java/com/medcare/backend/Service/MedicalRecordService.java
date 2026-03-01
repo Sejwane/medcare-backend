@@ -5,6 +5,8 @@ import com.medcare.backend.Repository.MedicalRecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 
@@ -15,6 +17,11 @@ public class MedicalRecordService {
     private MedicalRecordRepository medicalRecordRepository;
     public MedicalRecord register(MedicalRecord medicalRecord){
         return  medicalRecordRepository.save(medicalRecord);
+    }
+
+    public List<MedicalRecord>getAllMedicalRecords(){
+        return medicalRecordRepository.findAll();
+
     }
 
 }

@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.medcare.backend.Model.Invoice;
 import com.medcare.backend.Service.InvoiceService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/invoices")
@@ -25,5 +29,11 @@ public Invoice register(@RequestBody Invoice invoice) {
     
     return invoiceService.register(invoice);
 }
+
+@GetMapping("/all")
+public List<Invoice>getAllInvoices() {
+    return invoiceService.getAllInvoices();
+}
+
 
 }

@@ -10,6 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.medcare.backend.Model.Department;
 import com.medcare.backend.Service.DepartmentService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/departments")
@@ -25,6 +30,12 @@ public class DepartmentController {
         //calls the service
         return departmentService.saveDepartment(department);
     }
+
+    @GetMapping("/all")
+    public List<Department> getAllDepartments() {
+        return departmentService.getAllDepartments();
+    }
+    
 }
 
 
