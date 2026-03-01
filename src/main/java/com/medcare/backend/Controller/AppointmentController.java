@@ -10,6 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.medcare.backend.Model.Appointment;
 import com.medcare.backend.Service.AppointmentService;
 
+import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+
 @RestController
 @RequestMapping("api/appointments")
 @CrossOrigin(origins="*")
@@ -17,9 +22,16 @@ import com.medcare.backend.Service.AppointmentService;
 public class AppointmentController {
     @Autowired
     private AppointmentService appointmentService;
+
     @PostMapping("/register")
     public Appointment register(@RequestBody Appointment appointment) {
         
         return appointmentService.register(appointment);
     }
+
+    @GetMapping("/all")
+    public List<Appointment>getAllAppointments(){
+        return appointmentService.getAllAppointments();
+    }
+    
 }
