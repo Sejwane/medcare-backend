@@ -35,5 +35,4 @@ public List<Invoice>getAllInvoices() {
     return invoiceService.getAllInvoices();
 }
 
-
 }
