@@ -32,23 +32,30 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    @Transactional
-    public Optional<User> userUpdate(Integer id,User update){
-        Optional<User> currentUser=userRepository.findById(id);
+  
 
-        if (currentUser.isPresent()){
-            User newDetails = currentUser.get();
+@Transactional
+public Optional<User> userUpdate(Integer id, User update) {
 
-            newDetails.setFirstName(update.getFirstName());
-            newDetails.setLastName(update.getLastName());
-            newDetails.setEmail(update.getEmail());
-
-            User newUserDetails=userRepository.save(newDetails);
-
-            return Optional.of(newUserDetails);
-        }
-
-        return Optional.empty();
+    if (update.getFirstName() == null || update.getFirstName().isBlank()) {
+        throw new IllegalArgumentException("First name cannot be empty");
     }
+
+    if (update.getEmail() == null || update.getEmail().isBlank()) {
+        throw new IllegalArgumentException("Email cannot be empty");
+    }
+
+    return userRepository.findById(id)
+            .map(user -> {
+                user.setFirstName(update.getFirstName());
+                user.setEmail(update.getEmail());
+
+                if (update.getLastName() != null && !update.getLastName().isBlank()) {
+                    user.setLastName(update.getLastName());
+                }
+
+                return userRepository.save(user);
+            });
+}
 
 }
