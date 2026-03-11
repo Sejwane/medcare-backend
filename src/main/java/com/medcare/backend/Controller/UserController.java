@@ -10,9 +10,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.medcare.backend.Model.User;
 import com.medcare.backend.Service.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.lang.IllegalArgumentException;
 import java.util.List;
+import org.springframework.http.ResponseEntity;
+import java.util.Optional;
 
 
 @RestController
@@ -35,4 +40,20 @@ public class UserController {
         return userService.getAllUsers();
     }
     
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable Integer id,@RequestBody User update){
+        try {
+            Optional<User> updatedUser=userService.userUpdate(id, update);
+
+            if (updatedUser.isPresent()){
+                return ResponseEntity.ok(updatedUser.get());
+            }else {
+                return ResponseEntity.status(404).build();
+            }
+        } catch (IllegalArgumentException e){
+            return ResponseEntity.badRequest().build();
+        }
+
+    }
 }
