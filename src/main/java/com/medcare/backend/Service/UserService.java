@@ -45,6 +45,11 @@ public Optional<User> userUpdate(Integer id, User update) {
         throw new IllegalArgumentException("Email cannot be empty");
     }
 
+    /*Well this update using the validation in this file works fine but as i scale the system
+    it gets to a point where i have alot of if statements and it wont be sustainable so all the small 
+    updates will remain as such but all the others will need DTO's
+    */
+
     return userRepository.findById(id)
             .map(user -> {
                 user.setFirstName(update.getFirstName());
