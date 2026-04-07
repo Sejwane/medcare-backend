@@ -24,6 +24,9 @@ public class User {
     @Column(name = "role_id")
     private Integer roleId;
 
+    @Column(name = "is_deleted")
+    private Boolean isDeleted = false;
+
     public User() {} // required by Hibernate
 
     public User(String firstName, String lastName, String email, String password, Integer roleId) {

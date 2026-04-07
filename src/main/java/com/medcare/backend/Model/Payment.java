@@ -29,6 +29,9 @@ public class Payment {
     @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate paymentDate;
 
+    @Column(name = "is_deleted")
+    private Boolean isDeleted = false;
+
     public Payment(){}
 
     public Payment(Invoice invoice,String paymentMethod,Double amount,LocalDate paymentDate){

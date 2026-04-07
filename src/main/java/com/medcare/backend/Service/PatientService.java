@@ -41,10 +41,8 @@ public class PatientService {
             }
 
         );
-
-        
+  
     }
-
    
 }
 

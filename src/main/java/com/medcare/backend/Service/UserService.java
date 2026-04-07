@@ -1,6 +1,7 @@
 
 package com.medcare.backend.Service;
 
+import com.medcare.backend.DTO.UserUpdateDTO;
 import com.medcare.backend.Model.User;
 import com.medcare.backend.Repository.UserRepository;
 
@@ -35,28 +36,18 @@ public class UserService {
   
 
 @Transactional
-public Optional<User> userUpdate(Integer id, User update) {
+public Optional<User> userUpdate(Integer id, UserUpdateDTO updateDto) {
 
-    if (update.getFirstName() == null || update.getFirstName().isBlank()) {
-        throw new IllegalArgumentException("First name cannot be empty");
-    }
-
-    if (update.getEmail() == null || update.getEmail().isBlank()) {
-        throw new IllegalArgumentException("Email cannot be empty");
-    }
-
-    /*Well this update using the validation in this file works fine but as i scale the system
-    it gets to a point where i have alot of if statements and it wont be sustainable so all the small 
-    updates will remain as such but all the others will need DTO's
-    */
-
+    
     return userRepository.findById(id)
             .map(user -> {
-                user.setFirstName(update.getFirstName());
-                user.setEmail(update.getEmail());
+                
+                user.setFirstName(updateDto.getFirstName());
+                user.setEmail(updateDto.getEmail());
 
-                if (update.getLastName() != null && !update.getLastName().isBlank()) {
-                    user.setLastName(update.getLastName());
+                
+                if (updateDto.getLastName() != null && !updateDto.getLastName().isBlank()) {
+                    user.setLastName(updateDto.getLastName());
                 }
 
                 return userRepository.save(user);
@@ -64,3 +55,5 @@ public Optional<User> userUpdate(Integer id, User update) {
 }
 
 }
+
+
