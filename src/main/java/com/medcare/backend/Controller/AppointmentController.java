@@ -8,10 +8,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.medcare.backend.Model.Appointment;
+import com.medcare.backend.DTO.AppointmentUpdateDTO;
 import com.medcare.backend.Service.AppointmentService;
+import org.springframework.http.ResponseEntity;
+
+import jakarta.validation.Valid;
+
+import java.util.Optional;
 
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -33,5 +41,17 @@ public class AppointmentController {
     public List<Appointment>getAllAppointments(){
         return appointmentService.getAllAppointments();
     }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Appointment>updateAppointment(
+        @PathVariable Integer id,
+        @Valid @RequestBody AppointmentUpdateDTO updateDTO) {
+
+            Optional<Appointment> update=appointmentService.updateAppointment(id , updateDTO);
+
+            return update.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+
+        }
+    
     
 }
