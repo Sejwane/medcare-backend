@@ -7,7 +7,7 @@ import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
 
 public class DepartmentDTO {
-    @NotBlank(message="Department name is required")
+    
     @Size(max=100,message="Department name is too long")
     private String name;
 
@@ -28,6 +28,9 @@ public class DepartmentDTO {
 
     public void getConsultationFee(Double consultationFee){
         this.consultationFee=consultationFee;
+    }
+
+    public DepartmentDTO() {
     }
 
     public DepartmentDTO(Integer id, String name, Double consultationFee) {

@@ -18,9 +18,7 @@ public class DepartmentService {
         this.departmentRepository = departmentRepository;
     }
 
-    // =========================================
-    // GET METHODS
-    // =========================================
+   
 
     public DepartmentDTO getDepartmentById(Integer id){
         Department department = departmentRepository.findById(id).orElseThrow();
@@ -36,27 +34,25 @@ public class DepartmentService {
         return departmentRepository.findAll();
     }
 
-    // =========================================
-    // POST & PATCH PIPELINES (Using DTO)
-    // =========================================
+  
 
-    // 1. THE CREATE PIPELINE (Replaces the old saveDepartment method)
+    
     public Department createDepartment(DepartmentDTO dto) {
         Department department = new Department();
         
-        // Map the secure DTO data into a brand new entity
+        
         department.setName(dto.getName());
         department.setConsultationFee(dto.getConsultationFee());
         
         return departmentRepository.save(department);
     }
 
-    // 2. THE UPDATE PIPELINE (For PATCH requests with Null Guards)
+    
     public Department updateDepartment(Integer id, DepartmentDTO dto) {
-        // Find the existing department first
+    
         Department existingDepartment = departmentRepository.findById(id).orElseThrow();
 
-        // Null Guards: Only update the fields that the frontend actually sent
+        
         if (dto.getName() != null) {
             existingDepartment.setName(dto.getName());
         }
