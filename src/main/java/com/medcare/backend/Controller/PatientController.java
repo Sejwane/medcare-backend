@@ -31,18 +31,17 @@ public class PatientController {
     @Autowired
     private PatientService patientService;
 
-   @PostMapping("/register")
+  @PostMapping("/register")
     public ResponseEntity<?> register(@Valid @RequestBody PatientCreateDTO createDTO){
-        
-        // The Service layer will now take the secure DTO, convert it into a Patient Entity, and save it.
         try {
+            // We pass the DTO to the Service, and the Service returns the saved Entity
             Patient newPatient = patientService.register(createDTO);
             return ResponseEntity.ok(newPatient);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error registering patient: " + e.getMessage());
         }
     }
-
+    
     @GetMapping("/all")
     public List<Patient>getAllPatients() {
         return patientService.getAllPatients();
