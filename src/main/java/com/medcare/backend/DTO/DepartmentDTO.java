@@ -12,7 +12,7 @@ public class DepartmentDTO {
     private String name;
 
     @PositiveOrZero(message="Consultation fee should be greater than zero")
-    private double consultationFee;
+    private Double consultationFee;
 
     public String getName(){
         return name;
