@@ -20,6 +20,8 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.http.ResponseEntity;
 
+
+
 import com.medcare.backend.DTO.PatientCreateDTO;
 import com.medcare.backend.DTO.PatientUpdateDTO;
 
@@ -31,17 +33,18 @@ public class PatientController {
     @Autowired
     private PatientService patientService;
 
-  @PostMapping("/register")
-    public ResponseEntity<?> register(@Valid @RequestBody PatientCreateDTO createDTO){
-        try {
-            // We pass the DTO to the Service, and the Service returns the saved Entity
-            Patient newPatient = patientService.register(createDTO);
-            return ResponseEntity.ok(newPatient);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error registering patient: " + e.getMessage());
+    @PostMapping("/register")
+        public ResponseEntity<?> register(@Valid @RequestBody PatientCreateDTO createDTO) {
+            try {
+                // Pass the DTO to the Service layer
+                Patient newPatient = patientService.register(createDTO);
+                // Return the successfully saved Patient entity
+                return ResponseEntity.ok(newPatient);
+            } catch (Exception e) {
+                return ResponseEntity.badRequest().body("Registration failed: " + e.getMessage());
+            }
         }
-    }
-    
+
     @GetMapping("/all")
     public List<Patient>getAllPatients() {
         return patientService.getAllPatients();
