@@ -19,6 +19,9 @@ public class Patient {
     @Column(name="last_name")
     private String lastName;
 
+    @Column(name = "identification_type")
+    private String identificationType;
+
     @Column(name="id_number")
     private String idNumber;
 
@@ -105,6 +108,13 @@ public class Patient {
         this.dateOfBirth=dateOfBirth;
     }
     
+    public String getIdentificationType() {
+        return identificationType;
+    }
+
+    public void setIdentificationType(String identificationType) {
+        this.identificationType = identificationType;
+    }
 
 
 }

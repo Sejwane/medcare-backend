@@ -19,6 +19,8 @@ import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.http.ResponseEntity;
+
+import com.medcare.backend.DTO.PatientCreateDTO;
 import com.medcare.backend.DTO.PatientUpdateDTO;
 
 @RestController
@@ -29,9 +31,16 @@ public class PatientController {
     @Autowired
     private PatientService patientService;
 
-    @PostMapping("/register")
-    public Patient register(@RequestBody Patient patient){
-        return patientService.register(patient);
+   @PostMapping("/register")
+    public ResponseEntity<?> register(@Valid @RequestBody PatientCreateDTO createDTO){
+        
+        // The Service layer will now take the secure DTO, convert it into a Patient Entity, and save it.
+        try {
+            Patient newPatient = patientService.register(createDTO);
+            return ResponseEntity.ok(newPatient);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Error registering patient: " + e.getMessage());
+        }
     }
 
     @GetMapping("/all")
