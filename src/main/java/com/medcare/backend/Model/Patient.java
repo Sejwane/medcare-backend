@@ -3,10 +3,17 @@ package com.medcare.backend.Model;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
+
 import com.fasterxml.jackson.annotation.JsonFormat; 
 
 @Entity
 @Table(name = "patients")
+
+@SQLDelete(sql = "UPDATE patients SET is_deleted = true WHERE id=?")
+
+@SQLRestriction("is_deleted = false")
 
 public class Patient {
     @Id
@@ -34,6 +41,9 @@ public class Patient {
     @Column(name = "date_of_birth")
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfBirth;
+
+    @Column(name = "is_deleted")
+    private Boolean isDeleted = false;
 
     public Patient(){}
 
@@ -77,6 +87,10 @@ public class Patient {
         return dateOfBirth;
     }
     
+
+    public Boolean getIsDeleted() { 
+        return isDeleted; 
+    }
     //Setter
 
     public void setId(Integer id){
@@ -114,6 +128,10 @@ public class Patient {
 
     public void setIdentificationType(String identificationType) {
         this.identificationType = identificationType;
+    }
+
+    public void setIsDeleted(Boolean isDeleted) { 
+        this.isDeleted = isDeleted; 
     }
 
 

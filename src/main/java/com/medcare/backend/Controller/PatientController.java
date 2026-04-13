@@ -2,6 +2,7 @@ package com.medcare.backend.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,6 +45,26 @@ public class PatientController {
                 return ResponseEntity.badRequest().body("Registration failed: " + e.getMessage());
             }
         }
+
+        @DeleteMapping("/{id}")
+    public ResponseEntity<String> deletePatient(@PathVariable Integer id) {
+        try {
+            patientService.deletePatient(id);
+            return ResponseEntity.ok("Patient successfully archived.");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Failed to archive patient.");
+        }
+    }
+
+    @PatchMapping("/{id}/restore")
+    public ResponseEntity<String> restorePatient(@PathVariable Integer id) {
+        try {
+            patientService.restorePatient(id);
+            return ResponseEntity.ok("Patient successfully recovered.");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Failed to recover patient.");
+        }
+    }
 
     @GetMapping("/all")
     public List<Patient>getAllPatients() {

@@ -33,6 +33,15 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public void deleteUser(Integer id) {
+        userRepository.deleteById(id);
+    }
+
+    @Transactional 
+    public void restoreUser(Integer id) {
+        userRepository.restoreUser(id);
+    }
+
   
 
 @Transactional

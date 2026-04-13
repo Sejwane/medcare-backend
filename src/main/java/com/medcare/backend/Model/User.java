@@ -1,9 +1,18 @@
 package com.medcare.backend.Model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
 
 @Entity
 @Table(name = "users")
+
+@SQLDelete(sql = "UPDATE users SET is_deleted = true WHERE id=?")
+
+@SQLRestriction("is_deleted = false")
+
+
+
 public class User {
 
     @Id

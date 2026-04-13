@@ -18,6 +18,15 @@ public class PatientService {
     @Autowired
     private PatientRepository patientRepository;
 
+    public void deletePatient(Integer id) {
+        patientRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void restorePatient(Integer id) {
+        patientRepository.restorePatient(id);
+    }
+
     
     public Patient register(PatientCreateDTO createDTO) {
         
