@@ -1,4 +1,4 @@
-package com.medcare.backend;
+package com.medcare.backend.DTO;
 
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
